@@ -16,17 +16,6 @@ namespace trinket
         public MainForm()
         {
             InitializeComponent();
-
-            var Add = new Add();
-
-            Hotkey hk = new Hotkey();
-
-            hk.KeyCode = Keys.PageUp;
-            hk.Windows = true;
-            hk.Pressed += delegate { Add.Show(); };
-            hk.Register(Add);
-
-
         }
 
         private void Quit_Click(object sender, EventArgs e)
@@ -39,5 +28,15 @@ namespace trinket
             var Add = new Add();
             Add.Show();
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            Hotkey hk = new Hotkey();
+            hk.KeyCode = Keys.PageUp;
+            hk.Windows = true;
+            hk.Pressed += delegate { var Add = new Add(); Add.Show(); };
+            hk.Register(this);
+        }
+
     }
 }

@@ -93,6 +93,8 @@
             this.ShowInTaskbar = false;
             this.Text = "MainForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
+            //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.TrinketMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
