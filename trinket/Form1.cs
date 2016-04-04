@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MovablePython;
 
 namespace trinket
 {
@@ -15,6 +16,17 @@ namespace trinket
         public MainForm()
         {
             InitializeComponent();
+
+            var Add = new Add();
+
+            Hotkey hk = new Hotkey();
+
+            hk.KeyCode = Keys.PageUp;
+            hk.Windows = true;
+            hk.Pressed += delegate { Add.Show(); };
+            hk.Register(Add);
+
+
         }
 
         private void Quit_Click(object sender, EventArgs e)
