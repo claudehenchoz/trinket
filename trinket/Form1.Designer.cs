@@ -43,7 +43,7 @@
             // 
             this.TrinketIcon.ContextMenuStrip = this.TrinketMenu;
             this.TrinketIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("TrinketIcon.Icon")));
-            this.TrinketIcon.Text = "trinket";
+            this.TrinketIcon.Text = "Trinket";
             this.TrinketIcon.Visible = true;
             // 
             // TrinketMenu
@@ -55,36 +55,38 @@
             this.Quit});
             this.TrinketMenu.Name = "TrinketMenu";
             this.TrinketMenu.ShowImageMargin = false;
-            this.TrinketMenu.Size = new System.Drawing.Size(128, 98);
+            this.TrinketMenu.Size = new System.Drawing.Size(73, 76);
             // 
             // Add
             // 
             this.Add.Name = "Add";
-            this.Add.Size = new System.Drawing.Size(127, 22);
+            this.Add.Size = new System.Drawing.Size(72, 22);
             this.Add.Text = "Add";
             // 
             // Get
             // 
             this.Get.Name = "Get";
-            this.Get.Size = new System.Drawing.Size(127, 22);
+            this.Get.Size = new System.Drawing.Size(72, 22);
             this.Get.Text = "Get";
             // 
             // Quit
             // 
             this.Quit.Name = "Quit";
-            this.Quit.Size = new System.Drawing.Size(127, 22);
+            this.Quit.Size = new System.Drawing.Size(72, 22);
             this.Quit.Text = "Quit";
+            this.Quit.Click += new System.EventHandler(this.Quit_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(124, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(69, 6);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.TrinketMenu.ResumeLayout(false);

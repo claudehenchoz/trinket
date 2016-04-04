@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace trinket
 {
-    public partial class MainForm : Form
+    public partial class Add : Form
     {
-        public MainForm()
+        public Add()
         {
             InitializeComponent();
-        }
-
-        private void Quit_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }
