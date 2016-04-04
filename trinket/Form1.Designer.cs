@@ -60,26 +60,27 @@
             // Add
             // 
             this.Add.Name = "Add";
-            this.Add.Size = new System.Drawing.Size(72, 22);
+            this.Add.Size = new System.Drawing.Size(127, 22);
             this.Add.Text = "Add";
+            this.Add.Click += new System.EventHandler(this.Add_Click);
             // 
             // Get
             // 
             this.Get.Name = "Get";
-            this.Get.Size = new System.Drawing.Size(72, 22);
+            this.Get.Size = new System.Drawing.Size(127, 22);
             this.Get.Text = "Get";
             // 
             // Quit
             // 
             this.Quit.Name = "Quit";
-            this.Quit.Size = new System.Drawing.Size(72, 22);
+            this.Quit.Size = new System.Drawing.Size(127, 22);
             this.Quit.Text = "Quit";
             this.Quit.Click += new System.EventHandler(this.Quit_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(69, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(124, 6);
             // 
             // MainForm
             // 
@@ -88,7 +89,10 @@
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MainForm";
+            this.Opacity = 0D;
+            this.ShowInTaskbar = false;
             this.Text = "MainForm";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.TrinketMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
