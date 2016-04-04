@@ -41,14 +41,14 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(420, 451);
+            this.textBox1.Size = new System.Drawing.Size(422, 451);
             this.textBox1.TabIndex = 0;
             this.textBox1.WordWrap = false;
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(428, 4);
+            this.button1.Location = new System.Drawing.Point(429, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(51, 23);
             this.button1.TabIndex = 1;
@@ -57,7 +57,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(428, 28);
+            this.button2.Location = new System.Drawing.Point(429, 28);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(51, 23);
             this.button2.TabIndex = 2;
