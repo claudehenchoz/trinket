@@ -1,6 +1,6 @@
 ﻿namespace trinket
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,11 +29,77 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.TrinketIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.TrinketMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.Get = new System.Windows.Forms.ToolStripMenuItem();
+            this.Quit = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.TrinketMenu.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // TrinketIcon
+            // 
+            this.TrinketIcon.ContextMenuStrip = this.TrinketMenu;
+            this.TrinketIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("TrinketIcon.Icon")));
+            this.TrinketIcon.Text = "trinket";
+            this.TrinketIcon.Visible = true;
+            // 
+            // TrinketMenu
+            // 
+            this.TrinketMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Add,
+            this.Get,
+            this.toolStripSeparator1,
+            this.Quit});
+            this.TrinketMenu.Name = "TrinketMenu";
+            this.TrinketMenu.ShowImageMargin = false;
+            this.TrinketMenu.Size = new System.Drawing.Size(128, 98);
+            // 
+            // Add
+            // 
+            this.Add.Name = "Add";
+            this.Add.Size = new System.Drawing.Size(127, 22);
+            this.Add.Text = "Add";
+            // 
+            // Get
+            // 
+            this.Get.Name = "Get";
+            this.Get.Size = new System.Drawing.Size(127, 22);
+            this.Get.Text = "Get";
+            // 
+            // Quit
+            // 
+            this.Quit.Name = "Quit";
+            this.Quit.Size = new System.Drawing.Size(127, 22);
+            this.Quit.Text = "Quit";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(124, 6);
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "MainForm";
+            this.Text = "MainForm";
+            this.TrinketMenu.ResumeLayout(false);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.NotifyIcon TrinketIcon;
+        private System.Windows.Forms.ContextMenuStrip TrinketMenu;
+        private System.Windows.Forms.ToolStripMenuItem Add;
+        private System.Windows.Forms.ToolStripMenuItem Get;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem Quit;
     }
 }
 
