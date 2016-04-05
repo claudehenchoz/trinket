@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using System.IO;
 
-using System.Web.Script.Serialization;
+using System.Diagnostics;
 
+using YamlDotNet.Serialization;
 
 namespace trinket
 {
@@ -39,15 +39,11 @@ namespace trinket
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var NewEntry = new Entry();
-            NewEntry.date = DateTime.Now;
-            NewEntry.text = textBox1.Text;
-            NewEntry.name = "firstentry";
-
-            var json = new JavaScriptSerializer().Serialize(NewEntry);
-
-            File.WriteAllText("test.txt", json);
-
+            var NewEntry = new Entry(textBox1.Text, DateTime.Now, "firstentry");
+            var yaml = new Serializer();
+            StreamWriter streamWriter = new StreamWriter(Guid.NewGuid().ToString()+".txt");
+            yaml.Serialize(streamWriter, NewEntry);
+            streamWriter.Close();
             this.Close();
         }
 
