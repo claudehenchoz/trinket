@@ -8,6 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.IO;
+
+using System.Web.Script.Serialization;
+
+
 namespace trinket
 {
     public partial class Add : Form
@@ -30,6 +35,20 @@ namespace trinket
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var NewEntry = new Entry();
+            NewEntry.date = DateTime.Now;
+            NewEntry.text = textBox1.Text;
+            NewEntry.name = "firstentry";
+
+            var json = new JavaScriptSerializer().Serialize(NewEntry);
+
+            File.WriteAllText("test.txt", json);
+
+            this.Close();
         }
 
     }

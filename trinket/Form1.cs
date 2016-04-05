@@ -52,4 +52,14 @@ namespace trinket
         }
 
     }
+
+
+    [Serializable]
+    public class Entry
+    {
+        public String text;
+        public DateTime date;
+        public String name;
+    }
+
 }
