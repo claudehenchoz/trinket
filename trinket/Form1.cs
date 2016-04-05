@@ -36,6 +36,19 @@ namespace trinket
             hk.Windows = true;
             hk.Pressed += delegate { var Add = new Add(); Add.Show(); };
             hk.Register(this);
+
+            Hotkey hkget = new Hotkey();
+            hkget.KeyCode = Keys.PageDown;
+            hkget.Windows = true;
+            hkget.Pressed += delegate { var Get = new Get(); Get.Show(); };
+            hkget.Register(this);
+
+        }
+
+        private void Get_Click(object sender, EventArgs e)
+        {
+            var Get = new Get();
+            Get.Show();
         }
 
     }

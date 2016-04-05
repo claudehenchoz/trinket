@@ -55,30 +55,31 @@
             this.Quit});
             this.TrinketMenu.Name = "TrinketMenu";
             this.TrinketMenu.ShowImageMargin = false;
-            this.TrinketMenu.Size = new System.Drawing.Size(73, 76);
+            this.TrinketMenu.Size = new System.Drawing.Size(128, 98);
             // 
             // Add
             // 
             this.Add.Name = "Add";
-            this.Add.Size = new System.Drawing.Size(72, 22);
+            this.Add.Size = new System.Drawing.Size(127, 22);
             this.Add.Text = "Add";
             this.Add.Click += new System.EventHandler(this.Add_Click);
             // 
             // Get
             // 
             this.Get.Name = "Get";
-            this.Get.Size = new System.Drawing.Size(72, 22);
+            this.Get.Size = new System.Drawing.Size(127, 22);
             this.Get.Text = "Get";
+            this.Get.Click += new System.EventHandler(this.Get_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(69, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(124, 6);
             // 
             // Quit
             // 
             this.Quit.Name = "Quit";
-            this.Quit.Size = new System.Drawing.Size(72, 22);
+            this.Quit.Size = new System.Drawing.Size(127, 22);
             this.Quit.Text = "Quit";
             this.Quit.Click += new System.EventHandler(this.Quit_Click);
             // 
@@ -93,7 +94,6 @@
             this.ShowInTaskbar = false;
             this.Text = "MainForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
-            //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.TrinketMenu.ResumeLayout(false);
             this.ResumeLayout(false);
