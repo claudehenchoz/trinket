@@ -41,5 +41,10 @@ namespace trinket
             this.Close();
         }
 
+        private void Add_Shown(object sender, EventArgs e)
+        {
+            this.Activate();
+        }
+
     }
 }

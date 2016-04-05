@@ -81,6 +81,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Trinket";
             this.TopMost = true;
+            this.Shown += new System.EventHandler(this.Add_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
