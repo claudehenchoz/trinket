@@ -53,18 +53,4 @@ namespace trinket
 
     }
 
-    public class Entry
-    {
-        public String text { get; private set; }
-        public DateTime date { get; private set; }
-        public String name { get; private set; }
-
-        public Entry(string entrytext, DateTime entrydate, string entryname)
-        {
-            text = entrytext;
-            date = entrydate;
-            name = entryname;
-        }
-    }
-
 }
