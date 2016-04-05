@@ -41,6 +41,7 @@
             this.Name = "Get";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Get Trinket";
+            this.Shown += new System.EventHandler(this.Get_Shown);
             this.ResumeLayout(false);
 
         }
