@@ -9,10 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-using System.Diagnostics;
-
-using YamlDotNet.Serialization;
-
 namespace trinket
 {
     public partial class Add : Form
@@ -39,10 +35,8 @@ namespace trinket
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var NewEntry = new Entry(textBox1.Text, DateTime.Now, "firstentry");
-            var yaml = new Serializer();
             StreamWriter streamWriter = new StreamWriter(Guid.NewGuid().ToString()+".txt");
-            yaml.Serialize(streamWriter, NewEntry);
+            streamWriter.Write(textBox1.Text);
             streamWriter.Close();
             this.Close();
         }
