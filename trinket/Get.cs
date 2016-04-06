@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using System.IO;
+using System.Windows.Input;
 
 namespace trinket
 {
@@ -18,7 +19,7 @@ namespace trinket
         {
             InitializeComponent();
 
-            this.ActiveControl = textBox1;
+            this.ActiveControl = trinketSearchbox;
 
         }
 
@@ -72,9 +73,14 @@ namespace trinket
             trinkets.Dispose();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void trinketSearchbox_TextChanged(object sender, EventArgs e)
         {
-            (trinketDataGrid.DataSource as DataTable).DefaultView.RowFilter = string.Format("Text like '%{0}%'", textBox1.Text);
+            (trinketDataGrid.DataSource as DataTable).DefaultView.RowFilter = string.Format("Text like '%{0}%'", trinketSearchbox.Text);
         }
+
+
+
+
+
     }
 }
