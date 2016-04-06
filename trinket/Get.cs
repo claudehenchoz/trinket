@@ -17,6 +17,9 @@ namespace trinket
         public Get()
         {
             InitializeComponent();
+
+            this.ActiveControl = textBox1;
+
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -53,13 +56,12 @@ namespace trinket
                 row["Name"] = name;
                 trinkets.Rows.Add(row);
 
-                // MessageBox.Show(text, name, MessageBoxButtons.YesNo);
             }
 
             trinketDataGrid.DataSource = trinkets;
 
             trinketDataGrid.Columns[0].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            trinketDataGrid.Columns[0].Width = 495;
+            trinketDataGrid.Columns[0].Width = 512;
             trinketDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
             trinketDataGrid.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
@@ -68,6 +70,11 @@ namespace trinket
             trinketDataGrid.Sort(trinketDataGrid.Columns[1], ListSortDirection.Descending);
             
             trinkets.Dispose();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            (trinketDataGrid.DataSource as DataTable).DefaultView.RowFilter = string.Format("Text like '%{0}%'", textBox1.Text);
         }
     }
 }
