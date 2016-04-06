@@ -36,7 +36,7 @@ namespace trinket
         private void button1_Click(object sender, EventArgs e)
         {
             StreamWriter streamWriter = new StreamWriter(Guid.NewGuid().ToString()+".txt");
-            streamWriter.Write(textBox1.Text);
+            streamWriter.Write(textBox1.Text.Trim());
             streamWriter.Close();
             this.Close();
         }
