@@ -11,6 +11,7 @@ Trinket is a Windows Forms application built in C# (.NET Framework 4.5) that pro
 - **Build solution**: `dotnet build trinket.sln` or open in Visual Studio and build
 - **Debug build**: `dotnet build trinket.sln --configuration Debug`
 - **Release build**: `dotnet build trinket.sln --configuration Release`
+- **Single-file publishing build**: `dotnet publish trinket.sln --configuration Release --output ./publish`
 
 ## Architecture
 
