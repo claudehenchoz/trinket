@@ -34,12 +34,14 @@ namespace trinket
             Hotkey hk = new Hotkey();
             hk.KeyCode = Keys.PageUp;
             hk.Windows = true;
+            hk.Control = true;
             hk.Pressed += delegate { var Add = new Add(); Add.Show(); };
             hk.Register(this);
 
             Hotkey hkget = new Hotkey();
             hkget.KeyCode = Keys.PageDown;
             hkget.Windows = true;
+            hkget.Control = true;
             hkget.Pressed += delegate { var Get = new Get(); Get.Show(); };
             hkget.Register(this);
 
