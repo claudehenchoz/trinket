@@ -30,10 +30,22 @@ namespace trinket
                 this.Close();
                 return true;
             }
+            
+            if (keyData == (Keys.Control | Keys.Enter))
+            {
+                SaveAndClose();
+                return true;
+            }
+            
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            SaveAndClose();
+        }
+        
+        private void SaveAndClose()
         {
             StreamWriter streamWriter = new StreamWriter(Guid.NewGuid().ToString()+".txt");
             streamWriter.Write(textBox1.Text.Trim());
