@@ -61,14 +61,14 @@
             // 
             this.Add.Name = "Add";
             this.Add.Size = new System.Drawing.Size(127, 22);
-            this.Add.Text = "Add";
+            this.Add.Text = "Add  WIN+Ctrl+PgUp";
             this.Add.Click += new System.EventHandler(this.Add_Click);
             // 
             // Get
             // 
             this.Get.Name = "Get";
             this.Get.Size = new System.Drawing.Size(127, 22);
-            this.Get.Text = "Get";
+            this.Get.Text = "Get  WIN+Ctrl+PgDown";
             this.Get.Click += new System.EventHandler(this.Get_Click);
             // 
             // toolStripSeparator1
