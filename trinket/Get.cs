@@ -67,7 +67,16 @@ namespace trinket
             trinkets.Columns.Add("Modified", typeof(DateTime));
             trinkets.Columns.Add("Name", typeof(String));
 
-            string[] trinketfiles = Directory.GetFiles(".", "*.txt");
+            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string trinketFolder = Path.Combine(documentsPath, "Trinket");
+            
+            // Create the Trinket folder if it doesn't exist
+            if (!Directory.Exists(trinketFolder))
+            {
+                Directory.CreateDirectory(trinketFolder);
+            }
+            
+            string[] trinketfiles = Directory.GetFiles(trinketFolder, "*.txt");
             foreach (string trinketfile in trinketfiles) {
 
                 FileInfo fi = new FileInfo(trinketfile);

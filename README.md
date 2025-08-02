@@ -15,6 +15,7 @@ Trinket is a minimalist Windows application designed for developers, writers, an
 - **Quick Capture**: Win+Ctrl+PageUp to instantly add notes
 - **Auto-Save**: Notes are automatically saved with unique identifiers
 - **Rich Text Support**: Handles multi-line text and special characters
+- **Organized Storage**: Notes stored in your Documents/Trinket folder
 
 ### 🔍 **Powerful Search**
 - **Instant Search**: Win+Ctrl+PageDown for immediate access to all notes
@@ -34,6 +35,7 @@ Trinket is a minimalist Windows application designed for developers, writers, an
 1. Download the latest release from the [Releases](../../releases) page
 2. Extract `trinket.exe` to your preferred location
 3. Run `trinket.exe` - it will start minimized in the system tray
+4. Notes will be automatically stored in `%USERPROFILE%\Documents\Trinket\`
 
 ### Basic Usage
 
@@ -102,22 +104,27 @@ trinket/
 - **Quick Navigation**: Page Up/Down moves 5 items at a time for faster browsing  
 - **Instant Copy**: Selected text is immediately available in your clipboard
 - **Visual Feedback**: Selected rows are highlighted for clear indication
+- **Easy Access**: Find your notes folder at `Documents\Trinket` for backup or manual editing
+- **Cloud Sync**: Put your Documents folder in OneDrive/Google Drive to sync notes across devices
 
 ## 🔧 Technical Details
 
 - **Framework**: .NET 6.0 with Windows Forms
 - **Architecture**: Single-file executable with minimal dependencies
-- **Storage**: Plain text files with GUID filenames for uniqueness
+- **Storage**: Plain text files with GUID filenames stored in Documents/Trinket folder
 - **Hotkeys**: Windows API integration for system-wide accessibility
 - **Search**: Real-time DataTable filtering for instant results
 
 ## 📊 File Management
 
-Notes are stored as individual `.txt` files in the application directory:
+Notes are stored as individual `.txt` files in your Documents folder:
+- **Location**: `%USERPROFILE%\Documents\Trinket\` (created automatically)
 - **Naming**: Each note gets a unique GUID filename (e.g., `a1b2c3d4-e5f6-7890-abcd-ef1234567890.txt`)
 - **Content**: Plain text with preserved formatting
 - **Metadata**: File modification time used for chronological sorting
-- **Portability**: Easy to backup, sync, or migrate by copying `.txt` files
+- **User-Friendly**: Easy to find, backup, sync, or migrate your notes
+- **Multi-User**: Each Windows user gets their own Trinket folder
+- **Portable App**: Application can be moved anywhere without affecting notes
 
 ## 🤝 Contributing
 

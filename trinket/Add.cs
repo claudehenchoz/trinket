@@ -47,7 +47,17 @@ namespace trinket
         
         private void SaveAndClose()
         {
-            StreamWriter streamWriter = new StreamWriter(Guid.NewGuid().ToString()+".txt");
+            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string trinketFolder = Path.Combine(documentsPath, "Trinket");
+            
+            // Create the Trinket folder if it doesn't exist
+            if (!Directory.Exists(trinketFolder))
+            {
+                Directory.CreateDirectory(trinketFolder);
+            }
+            
+            string filePath = Path.Combine(trinketFolder, Guid.NewGuid().ToString() + ".txt");
+            StreamWriter streamWriter = new StreamWriter(filePath);
             streamWriter.Write(textBox1.Text.Trim());
             streamWriter.Close();
             this.Close();
