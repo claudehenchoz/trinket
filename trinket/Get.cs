@@ -63,6 +63,7 @@ namespace trinket
             trinketSearchbox.Focus();
 
             DataTable trinkets = new DataTable("trinkets_table");
+            trinkets.Columns.Add("Preview", typeof(String));
             trinkets.Columns.Add("Text", typeof(String));
             trinkets.Columns.Add("Modified", typeof(DateTime));
             trinkets.Columns.Add("Name", typeof(String));
@@ -82,10 +83,12 @@ namespace trinket
                 FileInfo fi = new FileInfo(trinketfile);
                 
                 string text = File.ReadAllText(trinketfile);
+                string preview = CreatePreview(text);
                 DateTime modified = fi.LastWriteTime;
                 string name = fi.Name;
 
                 DataRow row = trinkets.NewRow();
+                row["Preview"] = preview;
                 row["Text"] = text;
                 row["Modified"] = modified;
                 row["Name"] = name;
@@ -95,14 +98,20 @@ namespace trinket
 
             trinketDataGrid.DataSource = trinkets;
 
-            trinketDataGrid.Columns[0].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            trinketDataGrid.Columns[0].Width = 512;
+            // Hide the full text column, show only preview
+            trinketDataGrid.Columns["Text"].Visible = false;
+            
+            // Set up tooltip to show full text on hover
+            trinketDataGrid.CellMouseEnter += TrinketDataGrid_CellMouseEnter;
+            
+            trinketDataGrid.Columns["Preview"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            trinketDataGrid.Columns["Preview"].Width = 512;
             trinketDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
-            trinketDataGrid.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
-            trinketDataGrid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
+            trinketDataGrid.Columns["Modified"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
+            trinketDataGrid.Columns["Name"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
 
-            trinketDataGrid.Sort(trinketDataGrid.Columns[1], ListSortDirection.Descending);
+            trinketDataGrid.Sort(trinketDataGrid.Columns["Modified"], ListSortDirection.Descending);
             
             // Select first row if available
             if (trinketDataGrid.Rows.Count > 0)
@@ -171,6 +180,55 @@ namespace trinket
 
 
 
+
+        private string CreatePreview(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return "";
+
+            // Split into lines and filter out empty lines or lines with only spaces/markdown quotes
+            var lines = text.Split(new[] { '\r', '\n' }, StringSplitOptions.None)
+                           .Where(line => !string.IsNullOrWhiteSpace(line) && 
+                                         !string.IsNullOrWhiteSpace(line.TrimStart('>', ' ', '\t')))
+                           .ToList();
+
+            // Take first 7 lines
+            var previewLines = lines.Take(7).ToList();
+            
+            // Add [...] if we truncated
+            if (lines.Count > 7)
+            {
+                if (previewLines.Count > 0)
+                {
+                    previewLines[previewLines.Count - 1] += " [...]";
+                }
+                else
+                {
+                    previewLines.Add("[...]");
+                }
+            }
+
+            return string.Join(Environment.NewLine, previewLines);
+        }
+
+        private void TrinketDataGrid_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                var cell = trinketDataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                
+                // Only set tooltip for the Preview column
+                if (trinketDataGrid.Columns[e.ColumnIndex].Name == "Preview")
+                {
+                    string fullText = trinketDataGrid.Rows[e.RowIndex].Cells["Text"].Value?.ToString() ?? "";
+                    cell.ToolTipText = fullText;
+                }
+                else
+                {
+                    cell.ToolTipText = "";
+                }
+            }
+        }
 
     }
 }
