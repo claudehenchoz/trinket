@@ -138,7 +138,11 @@ namespace trinket
             // HTML Format structure: StartHTML, EndHTML, StartFragment, EndFragment
             try
             {
-                var lines = htmlData.Split('\n');
+                // Convert to bytes to handle Unicode properly
+                byte[] htmlBytes = Encoding.UTF8.GetBytes(htmlData);
+                string htmlString = Encoding.UTF8.GetString(htmlBytes);
+                
+                var lines = htmlString.Split('\n');
                 int startFragment = -1, endFragment = -1;
 
                 foreach (string line in lines)
@@ -149,9 +153,24 @@ namespace trinket
                         int.TryParse(line.Substring(12), out endFragment);
                 }
 
-                if (startFragment >= 0 && endFragment > startFragment && endFragment <= htmlData.Length)
+                if (startFragment >= 0 && endFragment > startFragment)
                 {
-                    return htmlData.Substring(startFragment, endFragment - startFragment);
+                    // Work with byte offsets for accurate positioning
+                    byte[] fragmentBytes = new byte[endFragment - startFragment];
+                    Array.Copy(htmlBytes, startFragment, fragmentBytes, 0, endFragment - startFragment);
+                    string fragment = Encoding.UTF8.GetString(fragmentBytes);
+                    
+                    // Clean up any incomplete HTML comments at the end
+                    if (fragment.Contains("<!--EndFragment"))
+                    {
+                        int endCommentIndex = fragment.IndexOf("<!--EndFragment");
+                        if (endCommentIndex >= 0)
+                        {
+                            fragment = fragment.Substring(0, endCommentIndex);
+                        }
+                    }
+                    
+                    return fragment.Trim();
                 }
             }
             catch { }
