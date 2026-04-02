@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Add Trinket</title>
+<style>
+:root {
+    color-scheme: light dark;
+    --bg:              light-dark(#f9fafb, #111827);
+    --surface:         light-dark(#ffffff, #1f2937);
+    --border:          light-dark(#e5e7eb, #374151);
+    --border-focus:    light-dark(#2563eb, #60a5fa);
+    --text:            light-dark(#111827, #f9fafb);
+    --muted:           light-dark(#6b7280, #9ca3af);
+    --btn-save-bg:     light-dark(#2563eb, #3b82f6);
+    --btn-save-fg:     #ffffff;
+    --btn-cancel-bg:   light-dark(#e5e7eb, #374151);
+    --btn-cancel-fg:   light-dark(#374151, #d1d5db);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+    width: 100%; height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    overflow: hidden;
+}
+#root {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 12px;
+    gap: 8px;
+}
+#hint {
+    font-size: 11px;
+    color: var(--muted);
+    flex-shrink: 0;
+    user-select: none;
+    letter-spacing: 0.01em;
+}
+#content {
+    flex: 1;
+    width: 100%;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', Consolas, monospace;
+    font-size: 12pt;
+    resize: none;
+    outline: none;
+    line-height: 1.6;
+    transition: border-color 0.12s;
+}
+#content:focus { border-color: var(--border-focus); }
+#content::placeholder { color: var(--muted); }
+#buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    flex-shrink: 0;
+}
+button {
+    padding: 6px 18px;
+    border: none;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.1s;
+}
+button:hover { opacity: 0.82; }
+button:active { opacity: 0.65; }
+#btn-save   { background: var(--btn-save-bg);   color: var(--btn-save-fg); }
+#btn-cancel { background: var(--btn-cancel-bg); color: var(--btn-cancel-fg); }
+</style>
+</head>
+<body>
+<div id="root">
+  <div id="hint">Ctrl+Enter — save &nbsp;·&nbsp; Esc — cancel &nbsp;·&nbsp; Ctrl+H — paste clipboard as blockquote</div>
+  <textarea id="content" placeholder="Type or paste a snippet…"></textarea>
+  <div id="buttons">
+    <button id="btn-cancel">Cancel</button>
+    <button id="btn-save">Save</button>
+  </div>
+</div>
+<script>
+(async () => {
+  const { invoke }           = window.__TAURI__.core;
+  const { getCurrentWindow } = window.__TAURI__.window;
+  const { listen }           = window.__TAURI__.event;
+
+  const win = getCurrentWindow();
+  const ta  = document.getElementById('content');
+
+  async function saveAndClose() {
+    const text = ta.value.trim();
+    if (!text) return;
+    try {
+      await invoke('cmd_save_snippet', { content: text });
+    } catch (e) {
+      console.error('save_snippet failed:', e);
+      return;
+    }
+    ta.value = '';
+    await win.hide();
+  }
+
+  async function cancel() {
+    ta.value = '';
+    await win.hide();
+  }
+
+  async function pasteBlockquote() {
+    try {
+      const bq = await invoke('cmd_get_clipboard_blockquote');
+      const s = ta.selectionStart;
+      const e = ta.selectionEnd;
+      ta.value = ta.value.slice(0, s) + bq + ta.value.slice(e);
+      ta.selectionStart = ta.selectionEnd = s + bq.length;
+      ta.focus();
+    } catch (e) {
+      console.error('cmd_get_clipboard_blockquote failed:', e);
+    }
+  }
+
+  ta.addEventListener('keydown', e => {
+    if (e.ctrlKey && e.key === 'Enter') {
+      e.preventDefault();
+      saveAndClose();
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      cancel();
+    } else if (e.ctrlKey && e.key === 'h') {
+      e.preventDefault();
+      pasteBlockquote();
+    }
+  });
+
+  document.getElementById('btn-save').addEventListener('click', saveAndClose);
+  document.getElementById('btn-cancel').addEventListener('click', cancel);
+
+  // Rust emits 'reset' each time show_window() is called — clear and focus.
+  await listen('reset', () => {
+    ta.value = '';
+    ta.focus();
+  });
+
+  ta.focus();
+})();
+</script>
+</body>
+</html>

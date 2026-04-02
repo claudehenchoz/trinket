@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Trinket",
+  "version": "0.1.0",
+  "identifier": "com.trinket.app",
+  "build": {
+    "frontendDist": "ui"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "label": "add",
+        "title": "Add Trinket",
+        "url": "add.html",
+        "width": 680,
+        "height": 480,
+        "resizable": false,
+        "alwaysOnTop": true,
+        "center": true,
+        "visible": false,
+        "skipTaskbar": true
+      },
+      {
+        "label": "get",
+        "title": "Get Trinket",
+        "url": "get.html",
+        "width": 820,
+        "height": 580,
+        "resizable": true,
+        "alwaysOnTop": false,
+        "center": true,
+        "visible": false,
+        "skipTaskbar": true
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  }
+}

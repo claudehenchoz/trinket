@@ -1,0 +1,1 @@
+{"default":{"identifier":"default","description":"Trinket window permissions","local":true,"windows":["add","get"],"permissions":["core:default","core:window:allow-show","core:window:allow-hide","core:window:allow-set-focus","core:window:allow-center","core:event:allow-listen","core:event:allow-emit"],"platforms":["windows","macOS","linux"]}}
